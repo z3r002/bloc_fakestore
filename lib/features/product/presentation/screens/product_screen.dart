@@ -3,6 +3,7 @@ import 'package:bloc_pet/core/utils/di.dart';
 import 'package:bloc_pet/features/product/presentation/bloc/product_bloc.dart';
 import 'package:bloc_pet/features/product/presentation/bloc/product_event.dart';
 import 'package:bloc_pet/features/product/presentation/bloc/product_state.dart';
+import 'package:bloc_pet/features/product/presentation/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,26 +45,18 @@ class _ProductScreenState extends State<ProductScreen> {
             return switch (state) {
               ProductInitial() || ProductLoading() =>
                 const Center(child: CircularProgressIndicator()),
-              ProductLoaded(products: final products) => ListView.builder(
-                itemCount: products.length,
-                itemBuilder: (context, index) => Card(
-                  margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  child: ListTile(
-                    leading: Image.network(
-                      products[index].image,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) =>
-                        const Icon(Icons.error_outline, size: 50),
-                    ),
-                    title: Text(products[index].title),
-                    subtitle: Text('\$${products[index].price.toStringAsFixed(2)}'),
-                    onTap: () {
-                      // Обработка нажатия на продукт
-                    },
-                  ),
+              ProductLoaded(products: final products) => GridView.builder(
+                padding: const EdgeInsets.all(8),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.7,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
                 ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return ProductCard(product: products[index]);
+                },
               ),
               ProductError(error: final error) =>
                 Center(child: Text('Ошибка загрузки: $error')),
