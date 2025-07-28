@@ -1,3 +1,4 @@
+import 'package:bloc_pet/features/login/data/dto/auth_dto.dart';
 import 'package:bloc_pet/features/product/data/dto/products_dto.dart';
 import 'package:bloc_pet/main.dart';
 import 'package:dio/dio.dart';
@@ -57,38 +58,8 @@ abstract class ApiClient {
   @GET("/products")
   Future<List<Product>> getProducts();
 
-  // @GET("/v1/mo/{mo_id}/district")
-  // Future<GetDistrictResponse> getDistrict(@Path("mo_id") int moId);
-  //
-  // @GET("/v1/mo/{mo_id}/district/{district}/street")
-  // Future<GetStreetsResponse> getStreet(
-  //     @Path("mo_id") int moId, @Path("district") String street);
-  //
-  // @GET("/v1/mo/{mo_id}/district/{district}/street/{street}/house")
-  // Future<GetHouseResponse> getHouse(@Path("mo_id") int moId,
-  //     @Path("district") String district, @Path("street") String street);
-  //
-  // @GET("/v1/mo/{mo_id}/district/{district}/street/{street}/house/{house}/flat")
-  // Future<GetFlatsResponse> getFlats(
-  //     @Path("mo_id") int moId,
-  //     @Path("district") String district,
-  //     @Path("street") String street,
-  //     @Path("house") String house);
-  //
-  // @GET("/v1/type-values")
-  // Future<GetTypeValues> getTypeValues();
-  //
-  // @POST("/v1/update-gas-status")
-  // Future sendGasTrue(@Body() GasTrueRequest request);
-  //
-  // @POST("/v1/add")
-  // Future addAddress(@Body() GasTrueRequest request);
-  //
-  // @POST("/v1/upload")
-  // Future uploadAddress(@Body() UploadAddressRequest request);
-  //
-  // @POST("/v1/auth/login")
-  // Future sendLogin(@Body() RequestLogin request);
+  @POST("/auth/login")
+  Future login(@Body() AuthRequest request);
 
 
 }
