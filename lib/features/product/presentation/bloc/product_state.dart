@@ -9,9 +9,16 @@ class ProductInitial extends ProductState {}
 class ProductLoading extends ProductState {}
 
 class ProductLoaded extends ProductState {
-  final List<Product> products;
+  final List<Product> products; // Отфильтрованные продукты
+  final List<Product> allProducts; // Полный список продуктов
+  final List<String> category;
+  final String selectedCategory;
 
-  ProductLoaded(this.products);
+  ProductLoaded(
+      this.products,
+      this.allProducts, // Добавляем поле для полного списка
+      [this.category = const [], this.selectedCategory = 'Все']
+      );
 }
 class ProductError extends ProductState {
   final String error;

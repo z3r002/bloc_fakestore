@@ -9,3 +9,8 @@ class GetProductEvent extends ProductEvent {
   const GetProductEvent({required this.id});
 }
 class LoadProducts extends ProductEvent {}
+
+class FilterProducts extends ProductEvent {
+  final String category;
+  const FilterProducts({required this.category});
+}
