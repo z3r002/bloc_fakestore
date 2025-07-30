@@ -33,14 +33,21 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is AuthError) {
+            // Clear any previous snackbars
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+              ),
             );
           } else if (state is AuthAuthenticated) {
             // Navigate to home screen on successful login
-            appRouter.push(ProductScreenRoute());
+            // and remove all previous routes
+            await appRouter.replaceAll([const ProductScreenRoute()]);
           }
         },
         child: Center(
