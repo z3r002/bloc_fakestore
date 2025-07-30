@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc_pet/core/routing/router.gr.dart';
 import 'package:flutter/material.dart';
 
-import '../../main.dart';
 
 @RoutePage()
 class UISplashScreen extends StatefulWidget {
@@ -13,26 +12,29 @@ class UISplashScreen extends StatefulWidget {
 }
 
 class _UISplashScreenState extends State<UISplashScreen> {
-  // final AuthStore authStore = GetIt.I.get<AuthStore>();
-  // final HomeStore homeStore = GetIt.I.get<HomeStore>();
-
-
   @override
   void initState() {
-    init();
     super.initState();
+    _init();
   }
-  init()async{
-    appRouter.replace(ProductScreenRoute());
-    // await homeStore.checkVersion();
-    //await initla();
+
+  Future<void> _init() async {
+    // Here you can add any initialization logic
+    // For example, check if user is already logged in
+    await Future.delayed(const Duration(seconds: 2)); // Simulate loading
+    
+    // For now, always redirect to login
+    if (mounted) {
+      context.router.replace(const LoginScreenRoute());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      backgroundColor: Colors.white,
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

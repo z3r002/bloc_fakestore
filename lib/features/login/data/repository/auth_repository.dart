@@ -9,7 +9,7 @@ class AuthRepository {
 
   Future authUser() async {
     try {
-      final token = await _apiClient.login( AuthRequest(username: '', password: ''));
+      final token = await _apiClient.login( AuthRequest(username: 'johnd', password: 'm38rmF\$'.toString()));
       return token;
     } on DioException catch (e) {
       print('Ошибка при получении продуктов: ${e.message}');

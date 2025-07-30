@@ -38,7 +38,7 @@ abstract class ApiClient {
             context: appRouter.navigatorKey.currentState!.context,
             builder: (ctx) => AlertDialog(
               title: Text('Ошибка!'),
-              content: Text(err.response!.data['message'].toString()),
+              content: Text(err.response!.data.toString()),
               actions: [
                 TextButton(
                     onPressed: () {
